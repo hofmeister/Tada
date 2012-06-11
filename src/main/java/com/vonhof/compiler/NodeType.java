@@ -13,5 +13,7 @@ public enum NodeType {
     INTERFACE,
     STRUCT,
     ANNOTATION,
-    PROGRAM
+    PROGRAM,
+    FRAGMENT,
+    EXPRESSION
 }

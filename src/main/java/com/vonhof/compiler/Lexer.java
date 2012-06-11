@@ -1,7 +1,7 @@
 package com.vonhof.compiler;
 
-import com.vonhof.compiler.exceptions.UnexpectedEOFException;
 import com.vonhof.compiler.exceptions.UnexpectedCharException;
+import com.vonhof.compiler.exceptions.UnexpectedEOFException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -26,7 +26,6 @@ public class Lexer {
     
     private final String[] KEYWORDS = {
         "new",
-        "var",
         "static",
         "class",
         "abstract",
@@ -37,16 +36,19 @@ public class Lexer {
         "protected",
         "private",
         "function",
+        "namespace",
+        "use",
         "for",
         "struct",
         "annotation",
-        "while",
+        "while","if","else",
         "final",
         "inline",
         "delete",
         "interface",
         "extends",
-        "implements"
+        "implements",
+        "true","false","TRUE","FALSE"
     };
     
     private final String[] PRIMITIVES = {
@@ -122,8 +124,14 @@ public class Lexer {
                         current = new Token(i,line,column,TokenType.STRING);
                     }
                     break;
-                case STMT_END:
-                    out.add(new Token(i,i+1,line,column,TokenType.END_STMT));
+                case ';':
+                    out.add(new Token(i,i+1,line,column,TokenType.SEMICOLON));
+                    break;
+                case ',':
+                    out.add(new Token(i,i+1,line,column,TokenType.COMMA));
+                    break;
+                case ':':
+                    out.add(new Token(i,i+1,line,column,TokenType.COLON));
                     break;
                 case '(':
                     out.add(new Token(i,i+1,line,column,TokenType.PARENTHESES_START));
@@ -143,6 +151,7 @@ public class Lexer {
                 case ']':
                     out.add(new Token(i,i+1,line,column,TokenType.SQ_BRACKET_END));
                     break;
+                
                 default:
                     foundValidChr = false;
                     break;
@@ -198,7 +207,9 @@ public class Lexer {
     }
     
     private Token getKeyword(int offset,int line,int column,String input) {
-        return lookup(TokenType.KEYWORD, KEYWORDS, offset,line,column, input);
+        Token lookup = lookup(null, KEYWORDS, offset,line,column, input);
+        String name = input.substring(offset,lookup.getLimit()-offset);
+        return new Token(offset,lookup.getLimit(), column, line, TokenType.valueOf(name.toUpperCase()));
     }
     
     private Token getPrimitive(int offset,int line,int column,String input) {

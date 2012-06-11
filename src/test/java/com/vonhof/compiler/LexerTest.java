@@ -34,7 +34,7 @@ public class LexerTest extends TestCase {
         assertEquals(TokenType.IDENT,tokens.get(1).getType());
         assertEquals(TokenType.ASSIGN,tokens.get(2).getType());
         assertEquals(TokenType.NUMBER,tokens.get(3).getType());
-        assertEquals(TokenType.END_STMT,tokens.get(4).getType());
+        assertEquals(TokenType.SEMICOLON,tokens.get(4).getType());
         
     }
     
@@ -73,7 +73,7 @@ public class LexerTest extends TestCase {
         assertEquals(TokenType.NUMBER,tokens.get(4).getType());
         assertEquals(TokenType.OPERATOR,tokens.get(5).getType());
         assertEquals(TokenType.NUMBER,tokens.get(6).getType());
-        assertEquals(TokenType.END_STMT,tokens.get(7).getType());   
+        assertEquals(TokenType.SEMICOLON,tokens.get(7).getType());   
     }
     
     public void test_keywords() {
@@ -90,7 +90,7 @@ public class LexerTest extends TestCase {
         assertEquals(TokenType.IDENT,tokens.get(5).getType());
         assertEquals(TokenType.ASSIGN,tokens.get(6).getType());
         assertEquals(TokenType.NUMBER,tokens.get(7).getType());   
-        assertEquals(TokenType.END_STMT,tokens.get(8).getType());
+        assertEquals(TokenType.SEMICOLON,tokens.get(8).getType());
         assertEquals(TokenType.CLOSURE_END,tokens.get(9).getType());
     }
 }

@@ -1,0 +1,8 @@
+{
+    "IMPORT":["import","{IDENT}",";"],
+    "IMPLEMENTS":["implements","{IDENT}",{"optional":true,"multi":true,"token":"{IDENT}","sep":","}],
+    "EXTENDS":["extends",{"optional":true,"multi":true,"token":"{IDENT}","sep":","}],
+    "MODIFIER":[{"type":"oneof","token":"abstract"}],
+    "CLASS":[]
+    
+}
